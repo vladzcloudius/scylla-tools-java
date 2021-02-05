@@ -1675,6 +1675,7 @@ class ExportProcess(ChildProcess):
                 self.write_rows_to_csv(token_range, rows, cql_types)
                 self.send((None, None))
                 session.complete_request()
+                print("Done with token range: {}".format(token_range))
 
         def err_callback(err):
             self.report_error(err, token_range)
@@ -1774,6 +1775,9 @@ class ExportProcess(ChildProcess):
             query += ' AND'
         if end_token is not None:
             query += ' token(%s) <= %s' % (pk_cols, end_token)
+
+        print("Going to query range: {}".format(token_range))
+
         return query
 
 
